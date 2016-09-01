@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="team.waibao.dao.CartMenuMapper">
+	<resultMap id="cartMenuResultMap" type="CartMenu">
+		<id property="id" column="cart_menuId" />
+		<result property="sellerId" column="sellerId"/>
+		<result property="menuImage" column="menuImage" />
+		<result property="menuPrice" column="menuPrice" />
+		<result property="menuName" column="menuName" />
+		<result property="amount" column="amount" />
+		<!--多对一关系 -->
+		<association property="cart" javaType="Cart">
+			<id property="cartId" column="cartId" />
+			<result property="userId" column="userId" />
+		</association>
+	</resultMap>
+
+	<insert id="addMenuToCart" parameterType="CartMenu">
+		insert into
+		z_cart_menu(menuImage,menuPrice,menuName,cartId,sellerId)
+		values(#{menuImage},#{menuPrice},#{menuName},#{cart.cartId},#{sellerId})
+	</insert>
+	<delete id="deleteMenuFromCart" parameterType="CartMenu">
+		delete from
+		z_cart_menu where cartId = #{cart.cartId} and menuName = #{menuName}
+	</delete>
+	<update id="updateMenuAccountFromCart" parameterType="CartMenu">
+	update z_cart_menu
+	set amount  = amount+ 1
+	where z_cart_menu.cartId = #{cart.cartId} and
+	      menuName=#{menuName} and
+	      menuPrice = #{menuPrice} and
+	      menuImage = #{menuImage} and
+	      sellerId = #{sellerId}
+	</update>
+	<select id="isContainCartMenu" parameterType="CartMenu" resultMap="cartMenuResultMap">
+	select * 
+	from z_cart_menu
+	where z_cart_menu.cartId = #{cart.cartId} and
+	      menuName=#{menuName} and
+	      menuPrice = #{menuPrice} and
+	      menuImage = #{menuImage} and
+	       sellerId = #{sellerId}
+	</select>
+	
+	<select id="getCartMenusByCartId" parameterType="int" resultMap="cartMenuResultMap">
+	select * 
+	from z_cart_menu
+	where z_cart_menu.cartId = #{_cartId}
+	</select>
+	
+	<select id="getCartMenuByCartMenuId" parameterType="int" resultMap="cartMenuResultMap">
+	select * 
+	from z_cart_menu
+	where cart_menuId = #{_cartMenuId}
+	</select>
+	<delete id="deleteCartMenuByCartMenuId" parameterType="int">
+		delete from
+		z_cart_menu
+		 where cart_menuId=#{_cartMenuId}
+	</delete>
+</mapper>

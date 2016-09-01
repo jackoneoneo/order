@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="team.waibao.dao.OrderMenuMapper">
+	<resultMap id="orderMenuResultMap" type="OrderMenu">
+		<id property="id" column="order_menuId" />
+		<result property="menuImage" column="menuImage" />
+		<result property="menuPrice" column="menuPrice" />
+		<result property="menuName" column="menuName" />
+		<result property="amount" column="amount" />
+		<!--多对一关系 -->
+		<association property="order" javaType="Order">
+			<id property="orderId" column="OrderId" />
+			<result property="orderPrice" column="orderPrice"/>
+			<result property="orderStatus" column="orderStatus"/>
+			<result property="orderTime" column="orderTime"/>
+		</association>
+	</resultMap>
+
+	<insert id="addMenuToOrder" parameterType="OrderMenu">
+		insert into
+		z_order_menu(menuImage,menuPrice,menuName,orderID,amount)
+		values(#{menuImage},#{menuPrice},#{menuName},#{order.orderId},#{amount})
+	</insert>
+	<delete id="deleteMenuFromOrder" parameterType="OrderMenu">
+		delete from
+		z_order_menu where orderId = #{order.orderId} and menuName = #{menuName}
+	</delete>
+	<update id="updateMenuAccountFromOrder" parameterType="OrderMenu">
+	update z_order_menu
+	set amount = #{amount}
+	where orderId = #{order.orderId} and menuName = #{menuName}
+	</update>
+	<select id="getOrderMenusByOrderId" parameterType="int" resultMap="orderMenuResultMap">
+	  select *
+	  from z_order_menu
+	  where orderId=#{_orderId}
+	</select>
+</mapper>

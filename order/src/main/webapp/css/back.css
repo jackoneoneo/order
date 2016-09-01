@@ -1,0 +1,55 @@
+@charset "utf-8";
+/* CSS Document */
+
+<style>
+#id0{
+	width:1300px;
+	height:900px;
+	background-color:#CFF;
+	
+}
+
+#TitleArea{
+	height:120px;
+	width:1300px;
+	position:absolute;
+	top:opx;
+	background-image:url(../images/top2.jpg);
+	background-color:#CFF;
+}
+
+#MainArea{
+	position:absolute;
+	top:120px;
+	height:auto;
+	width: 1300px;
+	background-color:#CFF;
+}
+
+#InputDetailBar{
+	position:relative;
+	width:1300px;
+	left:0px;
+	top:20px;
+	text-align:center;
+}
+
+.mainForm{
+	width:1300px;
+}
+
+
+     table
+        {
+            border-collapse: collapse;
+           
+            border:1px solid #000;
+        }
+        td
+        {
+            border:1px solid #000 ;
+			text-align:center;
+	        height:50px;
+        }
+
+</style>

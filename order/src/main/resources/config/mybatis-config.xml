@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+<!-- 别名都是类名 -->
+<typeAliases>
+<typeAlias alias="User" type="team.waibao.entity.User"/> 
+<typeAlias alias="Order" type="team.waibao.entity.Order"/> 
+<typeAlias alias="Cart" type="team.waibao.entity.Cart"/> 
+<typeAlias alias="Seller" type="team.waibao.entity.Seller"/> 
+<typeAlias alias="Menu" type="team.waibao.entity.Menu"/> 
+<typeAlias alias="CartMenu" type="team.waibao.entity.CartMenu"/> 
+<typeAlias alias="OrderMenu" type="team.waibao.entity.OrderMenu"/> 
+<typeAlias alias="SellerMenu" type="team.waibao.entity.SellerMenu"/> 
+<typeAlias alias="DividePageCondition" type="team.waibao.entity.DividePageCondition"/> 
+</typeAliases>
+
+</configuration>

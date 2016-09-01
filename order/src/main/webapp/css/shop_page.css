@@ -1,0 +1,202 @@
+@charset "utf-8";
+/* CSS Document */
+
+// JavaScript Document
+
+
+
+
+
+#id0{
+   width:1290px;
+   height:900px;;
+   border-color:#000;
+   position:relative;
+   text-align:center;
+   margin:1px;
+ 
+}
+
+#id1{
+	height:200px;
+	background-color:#069;
+	position:absolute;
+	top:0px;
+	left:0px;
+	width:1298px;
+	background-image:url(../themes/shop_top2.jpg);
+	
+	
+	
+}
+
+
+#id11{
+	position:absolute;
+	top:50px;
+	
+	
+}
+
+.id1 ul{
+	position:relative;
+	float:left;
+	top:10px;
+	height:50px;
+}
+
+.id1 ul li{
+	width:140px;
+	height:50px;
+	position:relative;
+	float:left;
+	
+	font-size:20px;color:#000;;
+	list-style-type:none;
+	border:1px;
+	border-color:#000;
+	text-align:center;
+}
+
+
+#id2{
+	position:absolute;
+	top:200px;
+	left:0px;
+	width:948px;
+	height:130px;
+	
+	border:1px solid #999;
+   
+}
+
+
+#id21{
+	position:absolute;
+	left:100px;
+	height:auto;
+	width:auto;
+	top:50px;
+	
+	
+}
+
+#id22{
+	position:absolute;
+	
+	top:40px;
+	
+	
+}
+
+#id3{
+	position:absolute;
+	top:200px;
+	left:950px;
+	width:330px;
+	height:800px;
+	background-image:url(../themes/main6.jpg);
+	
+    border:1px solid #999;
+}
+
+#id31{
+	position:absolute;
+	top:20px;
+	left:40px;
+}
+
+#id32{
+	position:absolute;
+	top:80px;
+	left:40px;
+	width:265px;
+	height:45px;
+	
+	text-align:center;
+	font-size:20px;color:#000;
+}
+
+#id33{
+	position:absolute;
+	top:150px;
+	left:40px;
+	width:265px;
+	height:100px;
+	
+	text-align:center;
+}
+
+
+
+
+.mod{
+	position:relative;
+	float:left;
+	width:100px;
+	height:40px;
+	text-align:center;
+	
+	font-size:20px;
+	border:1px;
+	
+	
+	
+	
+}
+
+
+.mod2{
+	position:relative;
+	float:right;
+	width:70px;
+	height:40px;
+	text-align:center;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:15px;
+	border:1px;
+	border-right:#000;
+	text-decoration:none;
+	
+}
+
+#id4{
+	position:absolute;
+	left:0px;
+	top:330px;
+	width:948px;
+	height:auto;
+	border:1px solid #999;
+	
+}
+
+#id4{
+	position:absolute;
+	top:330px;
+	left:0px;
+}
+
+#foot{
+	
+}
+
+.p{
+	font-size:20px;color:#000;
+}
+
+a:link{
+	text-decoration:none;
+	
+}
+
+a:hover{
+	text-decoration:none;
+	
+}
+
+.page{
+	position:relative;
+	float:left;
+	width:70px;
+}
+

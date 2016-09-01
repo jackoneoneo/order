@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="team.waibao.dao.SellerMenuMapper">
+	<resultMap id="SellerMenuResultMap" type="SellerMenu">
+		<id property="id" column="seller_menuId" />
+		<result property="menuImage" column="menuImage" />
+		<result property="menuPrice" column="menuPrice" />
+		<result property="menuName" column="menuName" />
+		<!--多对一关系 -->
+		<association property="seller" javaType="Seller">
+			<id property="sellerId" column="sellerId" />
+			<result property="storeName" column="storeName" />
+			<result property="orderPrice" column="orderPrice" />
+			<result property="password" column="password" />
+			<result property="sellerAddress" column="sellerAddress" />
+			<result property="sellerLogo" column="sellerLogo" />
+			<result property="sellerNagetiveAccount" column="sellerNagetiveAccount" />
+			<result property="sellerPositiveAccount" column="sellerPositiveAccount" />
+		</association>
+	</resultMap>
+	<insert id="addMenuToSeller" parameterType="SellerMenu">
+		insert into
+		z_seller_menu(menuImage,menuPrice,menuName,sellerId)
+		values(#{menuImage},#{menuPrice},#{menuName},#{seller.sellerId})
+	</insert>
+	<delete id="deleteMenuFromSeller" parameterType="SellerMenu">
+		delete from
+		z_seller_menu where sellerId = #{seller.sellerId} and menuName =
+		#{menuName}
+	</delete>
+	<select id="getMenusBySellerId" parameterType="int"
+		resultMap="SellerMenuResultMap">
+		select menuImage,menuPrice,menuName,seller_menuId,sellerId
+		from
+		z_seller_menu
+		where z_seller_menu.sellerId = #{_sellerId}
+	</select>
+	<select id="getMenusByCondition" parameterType="DividePageCondition"
+		resultMap="SellerMenuResultMap">
+		select menuPrice,menuName,seller_menuId
+		from
+		z_seller_menu
+		<where>
+			<if test="id != null"> AND sellerId = #{id} </if>
+		</where>
+		limit #{currentPage},#{pageSize}
+	</select>
+	<delete id="deleteMenuByMenuId" parameterType="int">
+		delete from
+		z_seller_menu where seller_menuId = #{_menuId}
+	</delete>
+	<select id="getSellerIdByMenuName" parameterType="String"
+		resultType="int">
+		select  DISTINCT sellerId
+		from  z_seller_menu
+		where menuName like CONCAT('%',#{_menuName},'%')
+	</select>
+	
+	<select id="getSellerMenuBySellerMenuId" parameterType="int"
+		resultMap="SellerMenuResultMap">
+		select menuImage,menuPrice,menuName,seller_menuId,sellerId
+		from
+		z_seller_menu
+		where z_seller_menu.seller_menuId = #{_sellerMenuId}
+	</select>
+	<select id="getSellerMenusBySellerMenuName" parameterType="SellerMenu"
+		resultMap="SellerMenuResultMap">
+		select menuImage,menuPrice,menuName,seller_menuId,sellerId
+		from
+		z_seller_menu
+		where sellerId = #{seller.sellerId} and
+		 menuName like CONCAT('%',#{menuName},'%')
+	</select>
+</mapper>

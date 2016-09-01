@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="team.waibao.dao.CartMapper">
+	<resultMap id="CartResultMap" type="Cart">
+		<id property="cartId" column="cartId" />
+		<!--一对一关系 -->
+		<association property="user"  javaType="User">
+			<id property="userId" column="userId" />
+			<result property="userName" column="userName" />
+			<result property="password" column="userPassword" />
+			<result property="userImage" column="userImage" />
+			<result property="address" column="address" />
+			<result property="type" column="type" />
+			<result property="phoneTel" column="phone" />
+			<result property="userAccount" column="userAccount" />
+			<result property="userStatus" column="userStatus" />
+		</association>
+		<!-- 一对多的关系 -->
+		<!-- property: 指的是集合属性的值, ofType：指的是集合中元素的类型 -->
+		<collection property="menus" ofType="CartMenu">
+			<id column="cart_menuId" property="id" />
+			<result column="menuName" property="menuName" />
+			<result column="menuPrice" property="menuPrice" />
+			<result column="menuImage" property="menuImage" />
+			<result column="amount" property="amount" />
+		</collection>
+	</resultMap>
+	
+	 <!--  -->
+    <select id="getCartByUserId" parameterType="int" resultMap="CartResultMap">
+	 select *
+	  from z_cart
+	  where z_cart.userId = #{_userId}
+	</select>
+	 <insert id="addUserIdToCart" parameterType="int">
+	  insert into z_cart(userId) values(#{_userId})
+	 </insert>
+	
+</mapper>

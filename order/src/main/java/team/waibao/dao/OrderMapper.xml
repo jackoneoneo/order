@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="team.waibao.dao.OrderMapper">
+	<resultMap id="orderResultMap" type="Order">
+		<id property="orderId" column="orderId" />
+		<result property="orderPrice" column="orderPrice" />
+		<result property="orderStatus" column="orderStatus" />
+		<result property="orderTime" column="orderTime" />
+		<!--多对一关系 -->
+		<association property="seller" javaType="Seller">
+			<id property="sellerId" column="sellerId" />
+			<result property="storeName" column="storeName" />
+			<result property="name" column="sellerName" />
+			<result property="password" column="password" />
+			<result property="sellerAddress" column="sellerAddress" />
+			<result property="sellerLogo" column="sellerLogo" />
+			<result property="sellerNagetiveAccount" column="sellerNagetiveAccount" />
+			<result property="sellerPositiveAccount" column="sellerPositiveAccount" />
+		</association>
+		<!--多对一关系 -->
+		<association property="user" javaType="User">
+			<id property="userId" column="userId" />
+			<result property="userName" column="userName" />
+			<result property="password" column="userPassword" />
+			<result property="userImage" column="userImage" />
+			<result property="address" column="address" />
+			<result property="type" column="type" />
+			<result property="phoneTel" column="phone" />
+			<result property="userAccount" column="userAccount" />
+			<result property="userStatus" column="userStatus" />
+		</association>
+	</resultMap>
+	<insert id="addOrder" parameterType="Order">
+		insert into
+		z_order(userId,orderPrice,sellerId,orderId)
+		values(#{user.userId},#{orderPrice},#{seller.sellerId},#{orderId});
+	</insert>
+	<update id="updateOrderStatus" parameterType="Order">
+		update z_order
+		set orderStatus = #{orderStatus}
+		where userId = #{user.userId} and sellerId = #{seller.sellerId}
+	</update>
+	<select id="getOrdersBySellerId" parameterType="int" resultMap="orderResultMap">
+		select orderId,orderPrice,orderStatus,orderTime
+		from z_order
+		where sellerId = #{_sellerId}
+	</select>
+	<select id="getMaxId"  resultType="int">
+		select max(orderId)
+		from z_order
+	</select>
+	<select id="getOrdersByCondition" parameterType="DividePageCondition"
+		resultMap="orderResultMap">
+		select orderId,orderPrice,orderStatus,orderTime
+		from z_order
+		<where>
+			<if test="id != null"> AND sellerId = #{id} </if>
+		</where>
+		limit #{currentPage},#{pageSize}
+	</select>
+	<select id="getOrdersByUserId" parameterType="int" resultMap="orderResultMap">
+		select *
+		from z_order
+		where userId=#{_userId}
+	</select>
+</mapper>
